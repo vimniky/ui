@@ -1351,6 +1351,18 @@ waitingPage:
     setup:
       kubernetes: Setting up Kubernetes
 
+loggingPage:
+  tags:
+    keyPlaceholder: e.g. foo
+    valuePlaceholder: e.g. bar
+    addActionLabel: Add Field
+  keyValueForm:
+    keyPlaceholder: e.g. 192.168.1.10
+  targetKafka:
+    addActionLabel: Add Broker
+    host: Host
+    port: Port
+
 ##############################
 # Partials
 ##############################
@@ -4534,6 +4546,9 @@ nav:
     link: "Node Templates"
   api:
     link: "API & Keys"
+  tools:
+    tab: Tools
+    logging: Logging
 
 ##############################
 # Resource Actions
