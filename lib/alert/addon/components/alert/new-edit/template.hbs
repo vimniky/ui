@@ -1,0 +1,83 @@
+<section class="header clearfix">
+  <div class="pull-left"><h1>{{if isCreate (t 'alertPage.new.addHeader') (t 'alertPage.new.editHeader')}}</h1></div>
+</section>
+
+<div class="row">
+  <div class="col span-12 pt-0 mt-0">
+    {{form-name-description
+      name=model.displayName
+      nameDisabled=false
+      description=model.description
+      bothColClass="col span-6 mt-0"
+      colClass="col span-12 mt-0"
+    }}
+  </div>
+</div>
+
+<div class="box mt-20">
+  {{# if (eq pageScope 'cluster')}}
+    {{alert/form-cluster-rules
+        resourceMap=resourceMap
+        pageScope=pageScope
+        isCreate=isCreate
+        model=model
+    }}
+  {{else if (eq pageScope 'project')}}
+    {{alert/form-project-rules
+        pageScope=pageScope
+        resourceMap=resourceMap
+        isCreate=isCreate
+        model=model
+    }}
+  {{else}}
+    <div> Oops, it's impossible! </div>
+  {{/if}}
+  <hr/>
+  {{alert/form-recipients
+      pageScope=pageScope
+      isCreate=isCreate
+      notifiers=resourceMap.notifiers
+      model=model
+  }}
+</div>
+
+<div class="mt-20 clearfix">
+
+  {{#unless showAdvanced}}
+  <div class="text-right text-small">
+    <a role="button" class="btn bg-transparent p-0" {{action "showAdvanced"}}>Show Advanced Options</a>
+  </div>
+  {{/unless}}
+
+  {{#if showAdvanced}}
+  <div class="box">
+    <div class="row">
+      <div class="col span-4">
+        <label class="acc-label">Initial Wait</label>
+        {{alert/time-duration value=model.initialWaitSeconds}}
+        <p class="text-info text-small">
+          How long to wait before sending a notification when an alert is triggered.
+        </p>
+      </div>
+
+      <div class="col span-4 offset-2">
+        <label class="acc-label">Interval</label>
+        {{alert/time-duration value=model.repeatIntervalSeconds}}
+        <p class="text-info text-small">Repeat interval of sending a notification when an alert is active.</p>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</div>
+
+<div class="mt-20">
+  {{top-errors errors=errors}}
+</div>
+
+<div class="mv-20">
+  {{save-cancel
+      createLabel=(if isCreate 'alertPage.create' 'alertPage.save')
+      save="save"
+      cancel="cancel"
+  }}
+</div>

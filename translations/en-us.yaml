@@ -5,7 +5,7 @@ languageContribute: "Help Translate Rancher"
 # Really generic things used in multiple places (use sparingly)
 ##############################
 generic:
-  actions: Actions
+  lctions: Actions
   activate: Activate
   add: Add
   all: All
@@ -1363,6 +1363,34 @@ loggingPage:
     host: Host
     port: Port
 
+alertPage:
+  addSelectorLabel: Add Selector
+  create: Create
+  save: Save
+  index:
+    stateTabs:
+      all: All
+      active: Active
+      suppressed: Suppressed
+      disabled: Disabled
+      addAlert: Add Alert
+    table:
+      noMatch: No alerts match the current search.
+      noData: No alerts
+      condition: Condition
+      target: Target
+      recipients: Recipients
+  new:
+    addHeader: Add Alert
+    editHeader: Edit alert
+
+notifierPage:
+  testedBtnLabel: OK
+  testingBtnLabel: Testing
+  clone: Clone
+  index:
+    table:
+      createdAt: Created
 ##############################
 # Partials
 ##############################
@@ -4549,6 +4577,8 @@ nav:
   tools:
     tab: Tools
     logging: Logging
+    alerts: Alerts
+    notifiers: Notifiers
 
 ##############################
 # Resource Actions
@@ -4588,6 +4618,9 @@ action:
   viewGraph: View Graph
   viewInApi: View in API
   viewInstance: View Instance
+  test: Test
+  mute: Mute
+  unmute: Umute
 
 ##############################
 # Resource Actions

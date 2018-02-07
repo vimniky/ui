@@ -1,0 +1,218 @@
+<div class="row nav nav-boxes mv-30 notifier-types">
+  {{#each types as |t|}}
+    <a
+      {{action "switchType" t.type}}
+      class="col span-2 nav-box-item driver {{if (eq t.type 'smtp') 'email' t.type}} {{if (eq t.type currentType) 'active' ''}}"
+      disabled={{t.disabled}}
+      alt={{t.type}}
+    >
+      <p>{{t.label}}</p>
+    </a>
+  {{/each}}
+</div>
+<hr />
+
+{{#if (eq currentType 'slack')}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <div class="acc-label text-capitalize">Slack webhook URL{{field-required}}</div>
+      {{input
+          classNames="form-control"
+          value=model.slackConfig.url
+          placeholder="e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6">
+      <div class="acc-label text-capitalize">Default Channel{{field-required}}</div>
+      {{input
+          classNames="form-control"
+          value=model.slackConfig.defaultRecipient
+          placeholder="e.g. #test"
+      }}
+    </div>
+  </div>
+{{else if (eq currentType 'email')}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+
+  <div class="acc-label text-capitalize">Smtp Server</div>
+  <section class="box">
+    <div class="row">
+      <div class="col span-6">
+        <div class="acc-label text-capitalize">Smtp Host{{field-required}}</div>
+        {{input
+            classNames="form-control"
+            value=model.smtpConfig.host
+            placeholder="e.g. 192.168.1.121"
+        }}
+      </div>
+
+      <div class="col span-4">
+        <div class="acc-label text-capitalize">Smtp Port{{field-required}}</div>
+        {{input classNames="form-control" value=model.smtpConfig.port placeholder="e.g. 465"}}
+      </div>
+      <div class="col span-2" style="margin-top: 43px;">
+        {{input type="checkbox" classNames="form-control" checked=model.smtpConfig.tls}} Use TLS
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-6">
+        <div class="acc-label text-capitalize">Smtp Username{{field-required}}</div>
+        {{input
+            classNames="form-control"
+            autocomplete="off"
+            value=model.smtpConfig.username
+            placeholder="e.g. John"
+        }}
+      </div>
+      <div class="col span-6">
+        <div class="acc-label text-capitalize">Smtp Password{{field-required}}</div>
+        {{input
+            type="password"
+            autocomplete="off"
+            classNames="form-control"
+            value=model.smtpConfig.password
+            placeholder="Your password"
+        }}
+      </div>
+    </div>
+  </section>
+  <div class="row">
+    <div class="col span-6">
+      <div class="acc-label text-capitalize">Default Receiver Email{{field-required}}</div>
+      {{input
+          classNames="form-control"
+          value=model.smtpConfig.defaultRecipient
+          placeholder="e.g. admin@example.com"
+      }}
+    </div>
+  </div>
+{{else if (eq currentType 'pagerduty')}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <div class="acc-label text-capitalize">Service Key{{field-required}}</div>
+      {{input
+          classNames="form-control"
+          value=model.pagerdutyConfig.serviceKey
+          placeholder="Your pagerduty serviceKey"
+      }}
+    </div>
+  </div>
+{{else if (eq currentType 'webhook')}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+          name=model.displayName
+          nameDisabled=false
+          description=model.description
+          bothColClass="col span-6 mt-0"
+          colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <div class="acc-label text-capitalize">Webhook URL{{field-required}}</div>
+      {{input
+          classNames="form-control"
+          value=model.webhookConfig.url
+          placeholder="Your webhook URL"
+      }}
+    </div>
+  </div>
+{{/if}}
+
+{{top-errors errors=errors}}
+
+<div class="over-hr mt-40">
+  <span>
+    {{#if testing}}
+      <button
+        style="color: white;"
+        class="btn bg-info btn-disabled"
+      >
+        <i class="icon icon-spinner icon-spin"></i>TESTING
+      </button>
+    {{else}}
+      {{#if tested}}
+        <button
+          {{action "test"}}
+          class="btn  btn-disabled {{if testOk 'bg-success' 'bg-error'}}"
+          style="color: white;"
+        >
+          {{if testOk 'OK!' 'NO!'}}
+        </button>
+      {{else}}
+        <button
+          {{action "test"}}
+          class="btn bg-info"
+          style="color: white;"
+        >
+          TEST
+        </button>
+      {{/if}}
+    {{/if}}
+  </span>
+</div>
+
+<div class="footer-actions">
+  {{save-cancel createLabel=addBtnLabel save="save" cancel="cancel"}}
+</div>
+
+{{#if (eq currentType 'slack')}}
+  <div class="box mt-20">
+    <h3>Don't know How to create a slack webhook URL?</h3>
+    <ol>
+      <li><a role="button" class="btn pl-0 btn-sm bg-transparent" target="_blank" rel="nofollow noreferer" href="https://rancher.slack.com/apps/A0F7XDUAZ-incoming-webhooks?page=1">Click here</a>to go to the<span class="text-muted ml-10 mr-10">Incoming WebHooks</span>page. If you haven't logined yet, please login first.</li>
+      <li>After logined, click the left<span class="text-muted ml-10 mr-10">Add Configuration</span>button to enter the<span class="text-muted ml-10 mr-10">New configuration</span>page.</li>
+      <li>At the bottom of the<span class="text-muted ml-10 mr-10">New configuration</span>page, choose a existing channel from the dropdown input box or click the <span class="text-muted ml-10 mr-10">create a new channel</span> link to create a new channel.</li>
+      <li>With a channel selected, click the<span class="text-muted ml-10 mr-10">Add Incomming WebHooks Intergration</span>button to generate a Webhook URL. The generated Webhook URL looks like: <code class="ml-10 mr-10">https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX</code></li>
+      <li>Copy the generated Webhook URL, paste it in the above input box and then click the save button.</li>
+    </ol>
+  </div>
+{{/if}}
+
+{{#if (eq currentType 'pagerduty')}}
+  <div class="box mt-20">
+    <h3>Don't know How to create a Pagerduty service key?</h3>
+    <ol>
+      <li>Click <a role="button" class="btn pl-0 btn-sm bg-transparent" target="_blank" rel="nofollow noreferer" href="https://www.pagerduty.com">here</a>to go to the pagerduty website. If you haven't logined yet, please login first.</li>
+      <li>After logined, navigate to<span class="text-muted ml-10 mr-10">Configuration > Service</span>to go to the Services pages.</li>
+      <li>If you want to use existing service, go to the detail page. If you want to create a new service, Click<span class="text-muted ml-10 mr-10">Add New Service</span></li>
+      <li>In the detailed service page, you can click<span class="text-muted ml-10 mr-10">New Integration</span>to add new key or use the key for existing integration.</li>
+    </ol>
+  </div>
+{{/if}}

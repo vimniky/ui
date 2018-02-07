@@ -1,0 +1,13 @@
+<section class="header clearfix">
+  <div class="pull-left pt-10"><h1 class="text-capitalize">{{pageScope}} Alerts</h1></div>
+  <div class="right-buttons">
+    {{#link-to "project.new" classNames="btn btn-sm bg-primary"}}{{t 'alertPage.index.stateTabs.addAlert'}}{{/link-to}}
+  </div>
+</section>
+
+{{alert-table
+    pageScope=pageScope
+    notifiers=notifiers
+    model=alerts
+    targetId=null
+}}

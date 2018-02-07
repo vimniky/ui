@@ -34,6 +34,7 @@ Router.map(function() {
   this.route('authenticated', {path: '/'}, function() {
     this.mount('global-admin', { path: '/g', resetNamespace: true});
     this.route('dummy-dev', {path: '/dev'});
+    this.mount('alert', {path: '/alerts', resetNamespace: true});
 
     this.route('apikeys');
     this.route('node-templates');
@@ -82,6 +83,11 @@ Router.map(function() {
         });
       });
       this.mount('logging', {path: '/logging'});
+      this.route('notifier', {path: '/notifiers'}, function() {
+        this.route('index', {path: '/'});
+        this.route('new', {path: '/add'});
+        this.route('edit', {path: '/:notifier_id'});
+      });
     });
 
     // Per-Project

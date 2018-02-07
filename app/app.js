@@ -82,6 +82,25 @@ const App = Application.extend({
         }
       }
     },
+    alert: {
+      dependencies: {
+        services: [
+          'app',
+          'clusterStore',
+          'globalStore',
+          'resource-actions',
+          'intl',
+          'modal',
+          'router',
+          'scope',
+          'store',
+          'tooltip',
+        ],
+        externalRoutes: {
+          notifier: 'authenticated.cluster.notifier',
+        }
+      }
+    },
   }
 });
 

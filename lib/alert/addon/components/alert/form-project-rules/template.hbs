@@ -1,0 +1,155 @@
+<section class="row">
+  <div class="col span-1">
+    <div class="pt-10">
+      <label>WHEN A</label>
+    </div>
+  </div>
+
+  <div class="col span-10">
+    <div class="row">
+      <div class="col span-3">
+        <label>
+          {{radio-button selection=model._targetType value="pod"}} Pod
+        </label>
+      </div>
+      <div class="col span-8 mt-0">
+        {{searchable-select
+            content=resourceMap.pods
+            class="form-control"
+            value=model.targetPod.podId
+            optionValuePath="id"
+            optionLabelPath="displayName"
+            placeholder="Choose a Pod"
+            readOnly=(not-eq model._targetType 'pod')
+        }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-3">
+        <label>
+          {{radio-button selection=model._targetType value="workload"}} Workload
+        </label>
+      </div>
+      <div class="col span-4 mt-0">
+        {{searchable-select
+            content=workloadTypes
+            class="form-control"
+            value=model.targetWorkload.workloadType
+            placeholder="Choose a Workload Type"
+            readOnly=(not-eq model._targetType 'workload')
+        }}
+      </div>
+      <div class="col span-4 mt-0">
+        {{searchable-select
+            content=workloads
+            class="form-control"
+            value=model.targetWorkload.workloadId
+            optionValuePath="id"
+            optionLabelPath="displayName"
+            placeholder="Choose a Resource"
+            readOnly=(not-eq model._targetType 'workload')
+        }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-3">
+        <label>
+          {{radio-button selection=model._targetType value="workloadSelector"}} Workload Selector
+        </label>
+      </div>
+      <div class="col span-8 mt-0">
+        {{searchable-select
+            content=workloadTypes
+            class="form-control"
+            value=model.targetWorkload.type
+            placeholder="Choose a Workload Type"
+            readOnly=(not-eq model._targetType 'workloadSelector')
+        }}
+        <div class="mt-20">
+          {{#if (eq model._targetType 'workloadSelector')}}
+            {{form-key-value
+                addActionLabel="alertPage.addSelectorLabel"
+                initialMap=model.targetWorkload.selector
+                changed=(action (mut model.targetWorkload.selector))
+            }}
+          {{else}}
+            <button {{action "noop"}} style="cursor:not-allowed;" class="btn bg-disabled icon-btn">
+              <span class="darken"><i class="icon icon-plus text-small"/></span>
+              <span>{{t 'alertPage.addSelectorLabel'}}</span>
+            </button>
+          {{/if}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<hr/>
+<section class="row">
+  <div class="col span-1">
+    <div style="padding-top:6px;">IS</div>
+  </div>
+  <div class="col span-10">
+  {{#if (eq model._targetType 'pod')}}
+    <label class="mr-10">
+      {{radio-button selection=model.targetPod.condition value="notrunning"}} Not Running
+    </label>
+    <label class="mr-10">
+      {{radio-button selection=model.targetPod.condition value="notscheduled"}} Not Scheduled
+    </label>
+    <label class="">
+      {{radio-button selection=model.targetPod.condition value="restarts"}} Restarted
+    </label>
+    <div style="display:inline-block;width:80px;">
+      {{input-integer
+          classNames="form-contorl input-sm"
+          disabled=(not-eq model.targetPod.condition 'restarts')
+          placeholder="e.g. 3"
+          min=1
+          value=model.targetPod.restartTimes
+      }}
+    </div>
+    times within the last
+    <div style="display:inline-block;width:80px;">
+      {{input-integer
+          classNames="form-contorl input-sm"
+          disabled=(not-eq model.targetPod.condition 'restarts')
+          placeholder="e.g. 5"
+          min=1
+          value=restartIntervalSeconds
+      }}
+    </div>
+    minutes
+  {{else if (or (eq model._targetType 'workload') (eq model._targetType 'workloadSelector'))}}
+    <div class="row">
+      <div class="col span-6 mt-0">
+        <div class="input-group pt-5">
+          {{input-slider
+              value=model.targetWorkload.availablePercentage
+              valueMin=0
+              valueMax=100
+              step=1
+          }}
+          <span class="input-group-addon">{{model.targetWorkload.availablePercentage}}% available</span>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div>More targetTypes... </div>
+  {{/if}}
+  </div>
+</section>
+
+<hr/>
+
+<section class="row">
+  <div class="col span-1">
+    SEND A
+  </div>
+  <div class="col span-10">
+    <label class="mr-10">{{radio-button selection=model.severity value="critical"}} Critical</label>
+    <label class="mr-10">{{radio-button selection=model.severity value="warning"}} Warning</label>
+    <label class="mr-10">{{radio-button selection=model.severity value="info"}} Info</label>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+{{#unless haveNotifiers}}
+  <div class="banner bg-warning">
+    <div class="banner-icon p-10"><i class="icon icon-alert"></i></div>
+    <div class="banner-message">
+      There are no notifiers to use. Go and {{#link-to-external 'notifier' clusterId}} create one {{/link-to-external}}.
+    </div>
+  </div>
+{{/unless}}
+<section class="row">
+  <div class="col span-1">
+    <div class="pt-10">
+      ALERT
+    </div>
+  </div>
+  <div class="col span-10">
+    {{#each model.recipients as |recipient idx|}}
+      {{alert/form-recipient-item
+          disableRemove=disableRemove
+          remove="remove"
+          isFirst=(eq idx 0)
+          notifiers=notifiers
+          model=recipient
+      }}
+    {{/each}}
+    <div class="mt-15">
+      <button class="btn bg-link icon-btn p-0" {{action "add"}}>
+        <span class="darken"><i class="icon icon-plus text-small"/></span>
+        <span>Add Notifier</span>
+      </button>
+    </div>
+  </div>
+</section>
