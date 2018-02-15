@@ -1,22 +1,22 @@
-<h2 class="mt-30">Embedded Elasticsearch Configuration</h2>
+<h2 class="mt-30">{{t 'loggingPage.embedded.header'}}</h2>
 <hr/>
 
 <section class="box">
-  <h4>Index Patterns</h4>
-  <p class="text-info text-small">Index patterns are used to generate Elacticsearch index</p>
+  <h4>{{t 'loggingPage.embedded.indexPatterns.header'}}</h4>
+  <p class="text-info text-small">{{t 'loggingPage.embedded.indexPatterns.helpText'}}</p>
   <div class="row">
     <div class="col span-6">
-      <label class="acc-label">Prefix{{field-required}}</label>
+      <label class="acc-label">{{t 'loggingPage.embedded.indexPatterns.prefix'}}{{field-required}}</label>
       {{input
           type="text"
           value=config.indexPrefix
           className="form-control"
-          placeholder="e.g. logstash"
+          placeholder=(t 'loggingPage.embedded.indexPatterns.prefixPlaceholder')
       }}
     </div>
     <div class="col span-6">
       <div style="margin-top: 34px;">
-        <label>Date Format: </label>
+        <label>{{t 'loggingPage.embedded.indexPatterns.dateFormat'}}</label>
         <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM-DD"}} YYYY-MM-DD</label>
         <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY-MM"}} YYY-MMM</label>
         <label class="mr-10">{{radio-button selection=config.dateFormat value="YYYY"}} YYYY</label>
@@ -24,7 +24,10 @@
     </div>
   </div>
   <div>
-    The generated index will be: <code class="text-italic">{{esIndex}}</code>, by default the index patters is ${clusterName}-${dateFormat}
+  {{t 'loggingPage.embedded.generatedIndex'
+    esIndex=esIndex
+    htmlSafe=true
+    }}
   </div>
 </section>
 

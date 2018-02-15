@@ -9,10 +9,12 @@
       }}
         {{#if (eq target.type 'embedded')}}
           <div class="badge-thirdparty">
-            <strong>Experimental</strong>
+            <strong>{{t 'loggingPage.targetNav.experimental'}}</strong>
           </div>
         {{/if}}
-        <p>{{target.label}}</p>
+        {{#if target.label}}
+          <p>{{t target.label}}</p>
+        {{/if}}
       {{/link-to}}
     {{/if}}
   {{/each}}
@@ -22,19 +24,19 @@
   <div class="text-center text-muted">
     {{#if (eq targetType 'none')}}
       {{#if (not hasCurrentTarget)}}
-        Logging is disabled in the current {{pageScope}}.
+        {{t 'loggingPage.targetNav.tips.caseA' pageScope=pageScope}}
       {{else}}
-        The current logging target is <code class="text-capitalize">{{currentTarget}}</code>, Click the save buttom below will disable logging in current {{pageScope}}.
+        {{t 'loggingPage.targetNav.tips.caseB' pageScope=pageScope currentTarget=currentTarget htmlSafe=true}}
       {{/if}}
     {{else if hasCurrentTarget}}
-      The current logging target is <code class="text-capitalize">{{currentTarget}}</code>,
+        {{t 'loggingPage.targetNav.tips.caseC' currentTarget=currentTarget htmlSafe=true}}
       {{#unless (eq currentTarget targetType)}}
-        click the save buttom below to set <span class="text-info text-capitalize">{{targetType}}</span> as the logging target.
+        {{t 'loggingPage.targetNav.tips.caseD' targetType=targetType htmlSafe=true}}
       {{else}}
-        click the save buttom below to update the <span class="text-info text-capitalize">{{targetType}}</span> configuration.
+        {{t 'loggingPage.targetNav.tips.caseE' targetType=targetType htmlSafe=true}}
       {{/unless}}
     {{else}}
-      No logging target, click the save buttom below to set <code class="text-capitalize">{{targetType}}</code> as the logging target.
+      {{t 'loggingPage.targetNav.tips.caseF' targetType=targetType htmlSafe=true}}
     {{/if}}
   </div>
   <hr/>

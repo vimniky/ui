@@ -1,36 +1,36 @@
-<h2 class="pt-30">Kafka Configuration</h2>
+<h2 class="pt-30"> {{t 'loggingPage.kafka.header'}} </h2>
 <hr/>
 
 <div class="box mb-10">
   <div>
-    Entrypoint:
-    <label class="mr-10">{{radio-button selection=brokerType value="zookeeper"}} Zookeeper</label>
-    <label class="mr-10">{{radio-button selection=brokerType value="broker"}} Broker</label>
-    <p class="text-info text-small">Use either Zookeeper or Broker list as the Kafka connection entrypoint.</p>
+    <span class="pr-10">{{t 'loggingPage.kafka.endpointType'}}:</span>
+    <label class="mr-10">{{radio-button selection=brokerType value="zookeeper"}} {{t 'loggingPage.kafka.zookeeper'}}</label>
+    <label class="mr-10">{{radio-button selection=brokerType value="broker"}} {{t 'loggingPage.kafka.broker'}}</label>
+    <p class="text-info text-small">{{t 'loggingPage.kafka.brokerTypeHelpText'}}</p>
   </div>
   <hr/>
   <section class="mb-30">
   {{#if (eq brokerType 'zookeeper')}}
     <div>
-      <label class="acc-label" for="">Endpoint{{field-required}}</label>
+      <label class="acc-label" for="">{{t 'loggingPage.endpoint'}}{{field-required}}</label>
       {{input
           type="text"
           value=config.zookeeperEndpoint
           classNames="form-control"
-          placeholder="e.g. https://192.168.1.10:2181"
+          placeholder=(t 'loggingPage.endpointPlaceholder')
       }}
     </div>
-    <p class="text-info text-small mb-0">Zookeeper is for building coordination, configuration management, leader detection, detecting node update in kafka cluster.</p>
+    <p class="text-info text-small mb-0">{{t 'loggingPage.kafka.zookeeperHelpText'}}</p>
   {{else}}
     {{#each brokerEndpoints as |item|}}
       <div class="row">
         <div class="col span-11">
-          <label class="acc-label" for="">Endpoint{{field-required}}</label>
+          <label class="acc-label" for="">{{t 'loggingPage.endpoint'}}{{field-required}}</label>
           {{input
               type="text"
               value=item.endpoint
               classNames="form-control"
-              placeholder="e.g. https://192.168.1.10:9092"
+              placeholder=(t 'loggingPage.endpointPlaceholder')
           }}
         </div>
         <div class="col span-1" style="padding-top: 29px">
@@ -40,11 +40,11 @@
         </div>
       </div>
     {{/each}}
-    <p class="text-info text-small mb-0">A Kafka cluster consists of one or more Brokers, config the host and port for each Broker. </p>
+    <p class="text-info text-small mb-0">{{t 'loggingPage.kafka.brokerTypeHelpText'}}</p>
     <div class="mt-20">
       <button class="btn bg-link icon-btn p-0" {{action "add"}}>
         <span class="darken"><i class="icon icon-plus text-small"/></span>
-        <span>Add Endpoint</span>
+        <span>{{t 'loggingPage.kafka.addEndpoint'}}</span>
       </button>
     </div>
   {{/if}}
@@ -52,14 +52,14 @@
   <hr/>
   <div class="row">
     <div class="col span-6 mt-0 pt-0">
-      <label class="acc-label" for="">Topic{{field-required}}</label>
+      <label class="acc-label" for="">{{t 'loggingPage.kafka.topic'}}{{field-required}}</label>
       {{input
           type="text"
           value=config.topic
           classNames="form-control"
-          placeholder="e.g. message"
+          placeholder=(t 'loggingPage.kafka.topicPlaceholder')
       }}
-      <p class="text-info text-small">Logs will be send to this topic.</p>
+      <p class="text-info text-small">{{t 'loggingPage.kafka.topicHelpText'}}</p>
     </div>
   </div>
 </div>
