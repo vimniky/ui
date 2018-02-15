@@ -1,12 +1,12 @@
 <div class="row nav nav-boxes mv-30 notifier-types">
-  {{#each types as |t|}}
+  {{#each types as |item|}}
     <a
-      {{action "switchType" t.type}}
-      class="col span-2 nav-box-item driver {{if (eq t.type 'smtp') 'email' t.type}} {{if (eq t.type currentType) 'active' ''}}"
-      disabled={{t.disabled}}
-      alt={{t.type}}
+      {{action "switchType" item.type}}
+      class="col span-2 nav-box-item driver {{if (eq item.type 'smtp') 'email' item.type}} {{if (eq item.type currentType) 'active' ''}}"
+      disabled={{item.disabled}}
+      alt={{item.type}}
     >
-      <p>{{t.label}}</p>
+      <p>{{t item.label}}</p>
     </a>
   {{/each}}
 </div>
@@ -26,21 +26,21 @@
   </div>
   <div class="row">
     <div class="col span-12">
-      <div class="acc-label text-capitalize">Slack webhook URL{{field-required}}</div>
+      <div class="acc-label text-capitalize">{{t 'notifierPage.slack.url'}}{{field-required}}</div>
       {{input
           classNames="form-control"
           value=model.slackConfig.url
-          placeholder="e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+          placeholder=(t 'notifierPage.slack.urlPlaceholder')
       }}
     </div>
   </div>
   <div class="row">
     <div class="col span-6">
-      <div class="acc-label text-capitalize">Default Channel{{field-required}}</div>
+      <div class="acc-label text-capitalize">{{t 'notifierPage.slack.defaultChannel'}}{{field-required}}</div>
       {{input
           classNames="form-control"
           value=model.slackConfig.defaultRecipient
-          placeholder="e.g. #test"
+          placeholder=(t 'notifierPage.slack.defaultRecipientPlaceholder')
       }}
     </div>
   </div>
@@ -57,21 +57,21 @@
     </div>
   </div>
 
-  <div class="acc-label text-capitalize">Smtp Server</div>
+  <div class="acc-label text-capitalize">{{t 'notifierPage.smtp.server'}}</div>
   <section class="box">
     <div class="row">
       <div class="col span-6">
-        <div class="acc-label text-capitalize">Smtp Host{{field-required}}</div>
+        <div class="acc-label text-capitalize">{{t 'notifierPage.smtp.host'}}{{field-required}}</div>
         {{input
             classNames="form-control"
             value=model.smtpConfig.host
-            placeholder="e.g. 192.168.1.121"
+            placeholder=(t 'notifierPage.smtp.hostPlaceholder')
         }}
       </div>
 
       <div class="col span-4">
-        <div class="acc-label text-capitalize">Smtp Port{{field-required}}</div>
-        {{input classNames="form-control" value=model.smtpConfig.port placeholder="e.g. 465"}}
+        <div class="acc-label text-capitalize">{{t 'notifierPage.smtp.port'}}{{field-required}}</div>
+        {{input classNames="form-control" value=model.smtpConfig.port placeholder=(t 'notifierPage.smtp.portPlaceholder')}}
       </div>
       <div class="col span-2" style="margin-top: 43px;">
         {{input type="checkbox" classNames="form-control" checked=model.smtpConfig.tls}} Use TLS
@@ -79,33 +79,33 @@
     </div>
     <div class="row">
       <div class="col span-6">
-        <div class="acc-label text-capitalize">Smtp Username{{field-required}}</div>
+        <div class="acc-label text-capitalize">{{t 'notifierPage.smtp.userName'}}{{field-required}}</div>
         {{input
             classNames="form-control"
             autocomplete="off"
             value=model.smtpConfig.username
-            placeholder="e.g. John"
+            placeholder=(t 'notifierPage.smtp.userNamePlaceholder')
         }}
       </div>
       <div class="col span-6">
-        <div class="acc-label text-capitalize">Smtp Password{{field-required}}</div>
+        <div class="acc-label text-capitalize">{{t 'notifierPage.smtp.password'}}{{field-required}}</div>
         {{input
             type="password"
             autocomplete="off"
             classNames="form-control"
             value=model.smtpConfig.password
-            placeholder="Your password"
+            placeholder=(t 'notifierPage.smtp.passwordPlaceholder')
         }}
       </div>
     </div>
   </section>
   <div class="row">
     <div class="col span-6">
-      <div class="acc-label text-capitalize">Default Receiver Email{{field-required}}</div>
+      <div class="acc-label text-capitalize">{{t 'notifierPage.smtp.defaultRecipient'}}{{field-required}}</div>
       {{input
           classNames="form-control"
           value=model.smtpConfig.defaultRecipient
-          placeholder="e.g. admin@example.com"
+          placeholder=(t 'notifierPage.smtp.defaultRecipient')
       }}
     </div>
   </div>
@@ -123,11 +123,11 @@
   </div>
   <div class="row">
     <div class="col span-12">
-      <div class="acc-label text-capitalize">Service Key{{field-required}}</div>
+      <div class="acc-label text-capitalize">{{t 'notifierPage.pagerduty.serviceKey'}}{{field-required}}</div>
       {{input
           classNames="form-control"
           value=model.pagerdutyConfig.serviceKey
-          placeholder="Your pagerduty serviceKey"
+          placeholder=(t 'notifierPage.pagerduty.serviceKeyPlaceholder')
       }}
     </div>
   </div>
@@ -145,11 +145,11 @@
   </div>
   <div class="row">
     <div class="col span-12">
-      <div class="acc-label text-capitalize">Webhook URL{{field-required}}</div>
+      <div class="acc-label text-capitalize">{{t 'notifierPage.webhook.url'}}{{field-required}}</div>
       {{input
           classNames="form-control"
           value=model.webhookConfig.url
-          placeholder="Your webhook URL"
+          placeholder=(t 'notifierPage.webhook.urlPlaceholder')
       }}
     </div>
   </div>
@@ -164,7 +164,7 @@
         style="color: white;"
         class="btn bg-info btn-disabled"
       >
-        <i class="icon icon-spinner icon-spin"></i>TESTING
+        <i class="icon icon-spinner icon-spin"></i>{{t 'notifierPage.testAction.testing'}}
       </button>
     {{else}}
       {{#if tested}}
@@ -173,7 +173,7 @@
           class="btn  btn-disabled {{if testOk 'bg-success' 'bg-error'}}"
           style="color: white;"
         >
-          {{if testOk 'OK!' 'NO!'}}
+          {{if testOk (t 'notifierPage.testAction.testOk') (t 'notifierPage.testAction.testFailed')}}
         </button>
       {{else}}
         <button
@@ -181,7 +181,7 @@
           class="btn bg-info"
           style="color: white;"
         >
-          TEST
+          {{t 'notifierPage.testAction.test'}}
         </button>
       {{/if}}
     {{/if}}

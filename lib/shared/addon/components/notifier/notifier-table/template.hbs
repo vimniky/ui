@@ -19,7 +19,7 @@
         colspan="{{sortable.fullColspan}}"
         class="text-center text-muted pt-20 pb-20"
       >
-        No match notifiers
+        {{t 'notifierPage.index.table.noMatch'}}
       </td>
     </tr>
   {{else if (eq kind "norows")}}
@@ -28,7 +28,7 @@
         colspan="{{sortable.fullColspan}}"
         class="text-center text-muted pt-20 pb-20"
       >
-        No notifers
+        {{t 'notifierPage.index.table.noData'}}
       </td>
     </tr>
   {{/if}}

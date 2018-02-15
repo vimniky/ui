@@ -1385,12 +1385,49 @@ alertPage:
     editHeader: Edit alert
 
 notifierPage:
+  notifiers: Notifiers
   testedBtnLabel: OK
   testingBtnLabel: Testing
+  notifierTypes:
+    slack: Slack
+    email: Email
+    pagerduty: Pagerdudy
+    webhook: Webhook
+  slack:
+    url: Slack Webhook URL
+    urlPlaceholder: e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+    defaultChannel: Default Channel
+    defaultRecipientPlaceholder: 'e.g. #example'
+  smtp:
+    server: Smtp Server
+    host: Host
+    hostPlaceholder: e.g. 192.168.1.121
+    port: Port
+    portPlaceholder: e.g. 465
+    userName: Username
+    userNamePlaceholder: e.g. John
+    password: Password
+    passwordPlaceholder: Your Password
+    defaultRecipient: Default Recipient Address
+    defaultRecipientPlaceholder: e.g. admin@example.com
+  pagerduty:
+    serviceKey: Service Key
+    serviceKeyPlaceholder: Your pagerduty serviceKey
+  webhook:
+    url: Webhook URL
+    urlPlaceholder: Your webhook URL
+  testAction:
+    testing: TESTING
+    testOk: OK!
+    testFailed: NO!
+    test: TEST
   clone: Clone
   index:
+    addActionLabel: Add Notifier
     table:
       createdAt: Created
+      noData: No Notifiers
+      noMatch: No Match
 ##############################
 # Partials
 ##############################
