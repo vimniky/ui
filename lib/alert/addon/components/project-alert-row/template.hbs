@@ -24,9 +24,9 @@
       {{/each}}
     </div>
   {{else if (eq model.targetType 'pod')}}
-    <div class="text-muted text-small"> {{model.targetPod.id}} </div>
+    <div class="text-muted text-small"> {{model.targetPod.podId}} </div>
   {{else if (eq model.targetType 'workload')}}
-    <div class="text-muted text-small"> {{model.targetWorkload.id}} </div>
+    <div class="text-muted text-small"> {{model.targetWorkload.workloadId}} </div>
   {{/if}}
 </td>
 <td data-title="{{dt.condition}}" class="clip">
