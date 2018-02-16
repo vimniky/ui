@@ -1477,10 +1477,11 @@ alertPage:
   addSelectorLabel: Add Selector
   create: Create
   save: Save
-  cluster: Cluster,
-  project: Project,
+  cluster: Cluster
+  project: Project
   alerts: Alerts
   index:
+    addAlert: Add Alert
     table:
       noMatch: No alerts match the current search.
       noData: No alerts
