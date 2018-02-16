@@ -44,7 +44,7 @@
 
   {{#unless showAdvanced}}
   <div class="text-right text-small">
-    <a role="button" class="btn bg-transparent p-0" {{action "showAdvanced"}}>Show Advanced Options</a>
+    <a role="button" class="btn bg-transparent p-0" {{action "showAdvanced"}}>{{t 'alertPage.newOrEdit.showAdvanced'}}</a>
   </div>
   {{/unless}}
 
@@ -52,17 +52,19 @@
   <div class="box">
     <div class="row">
       <div class="col span-4">
-        <label class="acc-label">Initial Wait</label>
+        <label class="acc-label">{{t 'alertPage.newOrEdit.initialWait'}}</label>
         {{alert/time-duration value=model.initialWaitSeconds}}
         <p class="text-info text-small">
-          How long to wait before sending a notification when an alert is triggered.
+          {{t 'alertPage.newOrEdit.initialWaitHelpText'}}
         </p>
       </div>
 
       <div class="col span-4 offset-2">
-        <label class="acc-label">Interval</label>
+        <label class="acc-label">{{t 'alertPage.newOrEdit.interval'}}</label>
         {{alert/time-duration value=model.repeatIntervalSeconds}}
-        <p class="text-info text-small">Repeat interval of sending a notification when an alert is active.</p>
+        <p class="text-info text-small">
+          {{t 'alertPage.newOrEdit.repeatIntervalHelpText'}}
+        </p>
       </div>
     </div>
   </div>

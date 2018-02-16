@@ -1480,6 +1480,40 @@ alertPage:
   cluster: Cluster
   project: Project
   alerts: Alerts
+  newOrEdit:
+    showAdvanced: Show Advanced Options
+    initialWait: Initial Wait
+    interval: Interval
+    initialWaitHelpText: How long to wait before sending a notification when an alert is triggered.
+    repeatIntervalHelpText: Repeat interval of sending a notification when an alert is active.
+    whenA: When A
+    happens: HAPPENS
+    sendA: SEND A
+    to: TO
+    alert: ALERT
+    is: IS
+    and: AND
+    critical: Critical
+    addNotifier: Add Notifier
+    info: Info
+    normal: Normal
+    warning: Warning
+    notReady: Not Ready
+    unhealthy: Unhealty
+    cpuUsage: CUP usage over
+    memUsage: MEM usage over
+    podPlaceholder: Choose a Pod
+    notRunning: Not Running
+    notScheduled: Not Scheduled
+    restarted: Restarted
+    available: available
+    createOne: create one
+    noNotifierHelpText: There are no notifiers to use. Go and
+    workloadTypePlaceholder: Choose a Workload Type
+    resourcePlaceholder: Choose a Resource
+    notifierPlaceholder: Choose a Notifier
+    nodePlaceholder: Choose a Node
+    systemServicePlaceholder: Choose a System Service
   targetTypes:
     node: Node
     deployment: Deployment
@@ -1489,7 +1523,6 @@ alertPage:
     Deployment: Deployment
     Daemonset: Daemonset
     Statefulset: Statefulset
-
     workload: Workload
     event: Event
     systemService: System Service

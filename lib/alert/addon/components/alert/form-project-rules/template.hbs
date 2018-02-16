@@ -1,7 +1,7 @@
 <section class="row">
   <div class="col span-1">
     <div class="pt-10">
-      <label>WHEN A</label>
+      <label>{{t 'alertPage.newOrEdit.whenA'}}</label>
     </div>
   </div>
 
@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=model._targetType value="pod"}} Pod
+          {{radio-button selection=model._targetType value="pod"}} {{t 'alertPage.targetTypes.pod'}}
         </label>
       </div>
       <div class="col span-8 mt-0">
@@ -19,7 +19,7 @@
             value=model.targetPod.podId
             optionValuePath="id"
             optionLabelPath="displayName"
-            placeholder="Choose a Pod"
+            placeholder=(t 'alertPage.newOrEdit.podPlaceholder')
             readOnly=(not-eq model._targetType 'pod')
         }}
       </div>
@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=model._targetType value="workload"}} Workload
+          {{radio-button selection=model._targetType value="workload"}} {{t 'alertPage.targetTypes.workload'}}
         </label>
       </div>
       <div class="col span-4 mt-0">
@@ -36,7 +36,7 @@
             content=workloadTypes
             class="form-control"
             value=model.targetWorkload.workloadType
-            placeholder="Choose a Workload Type"
+            placeholder=(t 'alertPage.newOrEdit.workloadTypePlaceholder')
             readOnly=(not-eq model._targetType 'workload')
         }}
       </div>
@@ -47,7 +47,7 @@
             value=model.targetWorkload.workloadId
             optionValuePath="id"
             optionLabelPath="displayName"
-            placeholder="Choose a Resource"
+            placeholder=(t 'alertPage.newOrEdit.resourcePlaceholder')
             readOnly=(not-eq model._targetType 'workload')
         }}
       </div>
@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col span-3">
         <label>
-          {{radio-button selection=model._targetType value="workloadSelector"}} Workload Selector
+          {{radio-button selection=model._targetType value="workloadSelector"}} {{t 'alertPage.targetTypes.workloadSelector'}}
         </label>
       </div>
       <div class="col span-8 mt-0">
@@ -63,7 +63,7 @@
             content=workloadTypes
             class="form-control"
             value=model.targetWorkload.type
-            placeholder="Choose a Workload Type"
+            placeholder=(t 'alertPage.newOrEdit.workloadTypePlaceholder')
             readOnly=(not-eq model._targetType 'workloadSelector')
         }}
         <div class="mt-20">
@@ -88,24 +88,24 @@
 <hr/>
 <section class="row">
   <div class="col span-1">
-    <div style="padding-top:6px;">IS</div>
+    <div style="padding-top:6px;">{{t 'alertPage.newOrEdit.is'}}</div>
   </div>
   <div class="col span-10">
   {{#if (eq model._targetType 'pod')}}
     <label class="mr-10">
-      {{radio-button selection=model.targetPod.condition value="notrunning"}} Not Running
+      {{radio-button selection=model.targetPod.condition value="notrunning"}} {{t 'alertPage.newOrEdit.notRunning'}}
     </label>
     <label class="mr-10">
-      {{radio-button selection=model.targetPod.condition value="notscheduled"}} Not Scheduled
+      {{radio-button selection=model.targetPod.condition value="notscheduled"}} {{t 'alertPage.newOrEdit.notScheduled'}}
     </label>
     <label class="">
-      {{radio-button selection=model.targetPod.condition value="restarts"}} Restarted
+      {{radio-button selection=model.targetPod.condition value="restarts"}} {{t 'alertPage.newOrEdit.restarted'}}
     </label>
     <div style="display:inline-block;width:80px;">
       {{input-integer
           classNames="form-contorl input-sm"
           disabled=(not-eq model.targetPod.condition 'restarts')
-          placeholder="e.g. 3"
+          placeholder="3"
           min=1
           value=model.targetPod.restartTimes
       }}
@@ -115,7 +115,7 @@
       {{input-integer
           classNames="form-contorl input-sm"
           disabled=(not-eq model.targetPod.condition 'restarts')
-          placeholder="e.g. 5"
+          placeholder="5"
           min=1
           value=restartIntervalSeconds
       }}
@@ -131,7 +131,7 @@
               valueMax=100
               step=1
           }}
-          <span class="input-group-addon">{{model.targetWorkload.availablePercentage}}% available</span>
+          <span class="input-group-addon">{{model.targetWorkload.availablePercentage}}% {{t 'alertPage.newOrEdit.available'}}</span>
         </div>
       </div>
     </div>
@@ -142,14 +142,13 @@
 </section>
 
 <hr/>
-
 <section class="row">
   <div class="col span-1">
-    SEND A
+    {{t 'alertPage.newOrEdit.sendA'}}
   </div>
   <div class="col span-10">
-    <label class="mr-10">{{radio-button selection=model.severity value="critical"}} Critical</label>
-    <label class="mr-10">{{radio-button selection=model.severity value="warning"}} Warning</label>
-    <label class="mr-10">{{radio-button selection=model.severity value="info"}} Info</label>
+    <label class="mr-10">{{radio-button selection=model.severity value="critical"}} {{t 'alertPage.newOrEdit.critical'}}</label>
+    <label class="mr-10">{{radio-button selection=model.severity value="warning"}} {{t 'alertPage.newOrEdit.warning'}}</label>
+    <label class="mr-10">{{radio-button selection=model.severity value="info"}} {{t 'alertPage.newOrEdit.info'}}</label>
   </div>
 </section>

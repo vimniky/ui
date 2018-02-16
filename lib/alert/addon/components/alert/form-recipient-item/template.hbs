@@ -1,6 +1,6 @@
 <section class="row">
   <div class="col span-1-of-24">
-    {{if isFirst 'TO' 'AND'}}
+    {{if isFirst (t 'alertPage.newOrEdit.to') (t 'alertPage.newOrEdit.and')}}
   </div>
   <div class="col mt-0 span-9-of-24">
     {{searchable-select
@@ -9,7 +9,7 @@
         value=model.notifierId
         optionValuePath="id"
         optionLabelPath="displayName"
-        placeholder="Choose a Notifier"
+        placeholder=(t 'alertPage.newOrEdit.notifierPlaceholder')
     }}
   </div>
 
@@ -17,7 +17,7 @@
     {{#if selectedNotifier.notifierLabel}}
       {{selectedNotifier.notifierLabel}}
     {{else}}
-      <span class="text-muted"> NONE </span>
+      <span class="text-muted"> {{t 'alertPage.na'}} </span>
     {{/if}}
   </div>
 
