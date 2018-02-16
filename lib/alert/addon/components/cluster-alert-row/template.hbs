@@ -34,7 +34,7 @@
     </div>
   {{else if (eq model.targetType 'event')}}
     <div class="text-muted text-small">
-      <span class="text-capicalize">{{model.targetEvent.resourceKind}}</span> event
+      <span class="text-capicalize">{{resourceKind}}</span> {{t 'alertPage.targetTypes.event'}}
     </div>
   {{/if}}
 </td>
@@ -61,7 +61,7 @@
            aria-describedby="tooltip-base"
            tooltipFor="tooltipLink"
       }}
-          <span class=""><a href="">{{model.recipients.length}} items</a></span>
+          <span class=""><a href="">{{model.recipients.length}} {{t 'alertPage.items'}}</a></span>
       {{/tooltip-element}}
     {{/if}}
   {{else}}

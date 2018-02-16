@@ -1480,6 +1480,22 @@ alertPage:
   cluster: Cluster
   project: Project
   alerts: Alerts
+  targetTypes:
+    node: Node
+    deployment: Deployment
+    daemonset: Daemonset
+    statefulset: Statefulset
+    # backend use capitalized name
+    Deployment: Deployment
+    Daemonset: Daemonset
+    Statefulset: Statefulset
+
+    workload: Workload
+    event: Event
+    systemService: System Service
+    nodeSelector: Node Selector
+    workloadSelector: Workload Selector
+    pod: Pod
   index:
     addAlert: Add Alert
     table:
@@ -1494,6 +1510,11 @@ alertPage:
         available: '{percent}% available'
         restarted: Restarted {times} times within the last {interval} minutes
         notready: Not Ready
+        unhealthy: Unhealty
+        happens: Happens
+        notReady: Not Ready
+        cpuUsage: 'CPU usage over {percent}%'
+        memUsage: 'MEM usage over {percent}%'
 
   new:
     addHeader: Add Alert
