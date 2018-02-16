@@ -1435,8 +1435,7 @@ loggingPage:
     generatedIndex: 'The generated index will be: <code class="text-italic">{esIndex}</code>, by default the index patters is {indexFormat}'
   splunk:
     header: Splunk HTTP Event Collector Configuration
-    helpText: 'You can find instructions on how to configre Splunk HEC(HTTP Event Collector)
-  <a href="http://docs.splunk.com/Documentation/Splunk/7.0.0/Data/UsetheHTTPEventCollector" target="_blank">here</a>.'
+    helpText: 'You can find instructions on how to configre Splunk HEC(HTTP Event Collector) <a href="http://docs.splunk.com/Documentation/Splunk/7.0.0/Data/UsetheHTTPEventCollector" target="_blank">here</a>.'
     token: Token
     tokenPlaceholder: Your Token
     tokenHelpText: 'Tokens are entities that let logging agents and HTTP clients connect to the HEC input. <a href="http://docs.splunk.com/Documentation/Splunk/7.0.0/Data/UsetheHTTPEventCollector#Configure_HTTP_Event_Collector_on_Splunk_Enterprise" target="_blank">Detail</a>'
@@ -1473,22 +1472,28 @@ loggingPage:
       debug: Debug
 
 alertPage:
+  na: N/A
+  items: Items
   addSelectorLabel: Add Selector
   create: Create
   save: Save
+  cluster: Cluster,
+  project: Project,
+  alerts: Alerts
   index:
-    stateTabs:
-      all: All
-      active: Active
-      suppressed: Suppressed
-      disabled: Disabled
-      addAlert: Add Alert
     table:
       noMatch: No alerts match the current search.
       noData: No alerts
       condition: Condition
       target: Target
       recipients: Recipients
+      displayCondition:
+        notScheduled: Not Scheduled
+        notRunning: Not Running
+        available: '{percent}% available'
+        restarted: Restarted {times} times within the last {interval} minutes
+        notready: Not Ready
+
   new:
     addHeader: Add Alert
     editHeader: Edit alert

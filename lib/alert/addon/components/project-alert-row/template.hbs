@@ -52,7 +52,7 @@
         {{#if firstRecipientOfNotifier}}
           {{firstRecipientOfNotifier.displayName}}
         {{else}}
-          N/A
+          {{t 'alertPage.na'}}
         {{/if}}
       </div>
     {{else if (gt model.recipients.length 1)}}
@@ -62,11 +62,11 @@
            tooltipTemplate='tooltip-static'
            aria-describedby="tooltip-base"
       }}
-        <span class=""><a href="">{{model.recipients.length}} items</a></span>
+        <span class=""><a href="">{{model.recipients.length}} {{t 'alertPage.items'}}</a></span>
       {{/tooltip-element}}
     {{/if}}
   {{else}}
-    N/A
+    {{t 'alertPage.na'}}
   {{/if}}
 </td>
 
