@@ -1363,7 +1363,7 @@ loggingPage:
       caseF: No logging target, click the save buttom below to set <code class="text-capitalize">{targetType}</code> as the logging target.
   targetTypes:
     embedded: Embedded
-    elasticsearch: ElasticSearch
+    elasticsearch: Elasticsearch
     splunk: Splunk
     kafka: Kafka
     syslog: syslog
