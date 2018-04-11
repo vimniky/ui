@@ -1,0 +1,183 @@
+<section class="header clearfix">
+  <h1 class="pull-left text-capitalize">{{t 'artifactoryPage.header'}}</h1>
+</section>
+
+<div class="text-center no-select">
+  <img src="{{app.baseAssets}}assets/images/providers/jfrog-artifactory.svg" width="240" alt="JFrog artifactory logo" />
+</div>
+
+{{#if (not enabled)}}
+  <div class="box">
+    <p class="mt-0">
+      Don't have a license? Start a <a href="https://jfrog.com/artifactory/free-trial/" target="_blank">free trial</a>
+    </p>
+    {{input-text-file
+        label='artifactoryPage.license.label'
+        value=model.license
+        canChangeName=false
+        nameRequired=true
+        accept="text/plain,.key"
+        minHeight=60
+        placeholder='artifactoryPage.license.placeholder'
+        shouldChangeName=false
+    }}
+  </div>
+
+  <div class="box mt-20">
+    <h4>{{t 'artifactoryPage.adminUser.header'}}</h4>
+    <p>
+      Once installation is complete, Artifactory has a default user with admin privileges predefined:
+      <ul>
+        <li> User: admin </li>
+        <li> Password: password</li>
+      </ul>
+      We strongly recommend you changing the admin password instead of using the default one.
+    </p>
+    <div class="row">
+      <div class="col span-6">
+        <div class="acc-label"> {{t 'artifactoryPage.adminUser.newPassword.label'}} </div>
+        {{input value=model.username placeholder=(t 'artifactoryPage.adminUser.newPassword.placeholder')}}
+      </div>
+      <div class="col span-6">
+        <div class="acc-label"> {{t 'artifactoryPage.adminUser.newPasswordAgain.label'}} </div>
+        {{input value=model.password placeholder=(t 'artifactoryPage.adminUser.newPasswordAgain.placeholder')}}
+      </div>
+    </div>
+  </div>
+
+  <div class="box mt-20">
+    <h4>{{t 'artifactoryPage.configuration.header'}}</h4>
+    <div>
+      <span class="pr-10">{{t 'artifactoryPage.configuration.serviceType.label'}}:</span>
+      <label class="mr-10">
+        {{radio-button selection=model.serviceType value="nodePort"}}
+        {{t 'artifactoryPage.configuration.serviceType.nodePort'}}
+      </label>
+      <label class="mr-10">
+        {{radio-button selection=model.serviceType value="clusterIp"}}
+        {{t 'artifactoryPage.configuration.serviceType.clusterIp'}}
+      </label>
+      <label class="mr-10">
+        {{radio-button selection=model.serviceType value="ingress"}}
+        {{t 'artifactoryPage.configuration.serviceType.ingress'}}
+      </label>
+    </div>
+    <div class="mt-10">
+      <span class="pr-10">{{t 'artifactoryPage.configuration.persistence.label'}}:</span>
+      <label class="mr-10">
+        {{radio-button selection=model.persistence value=false}}
+        {{t 'artifactoryPage.configuration.persistence.disable'}}
+      </label>
+      <label class="mr-20">
+        {{radio-button selection=model.persistence value=true}}
+        {{t 'artifactoryPage.configuration.persistence.enable'}}
+      </label>
+    </div>
+
+    {{#unless more}}
+      <div class="mt-20">
+        <button class="btn bg-transparent p-0" {{action "toggle"}}>
+          {{t 'artifactoryPage.configuration.more'}}
+        </button>
+      </div>
+    {{/unless}}
+    {{#if more}}
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">{{t 'artifactoryPage.configuration.cpuRequests.label'}}</label>
+        {{input-number
+            min=1
+            type="number"
+            value=requestsCpu
+            className="form-control"
+            placeholder=(t 'artifactoryPage.configuration.cpuRequests.placeholder')
+        }}
+      </div>
+
+      <div class="col span-6">
+        <label class="acc-label">{{t 'artifactoryPage.configuration.cpuLimits.label'}}</label>
+        {{input-number
+            min=1
+            type="number"
+            value=limitsCpu
+            className="form-control"
+            placeholder=(t 'artifactoryPage.configuration.cpuLimits.placeholder')
+        }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">{{t 'artifactoryPage.configuration.memRequests.label'}}</label>
+        {{input-number
+            min=500
+            type="number"
+            value=model.requestsMemory
+            className="form-control"
+            placeholder=(t 'artifactoryPage.configuration.memRequests.placeholder')
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">{{t 'artifactoryPage.configuration.memLimits.label'}}</label>
+        {{input-number
+            min=1000
+            type="number"
+            value=model.limitsMemory
+            className="form-control"
+            placeholder=(t 'artifactoryPage.configuration.memLimits.placeholder')
+        }}
+      </div>
+    </div>
+    {{/if}}
+  </div>
+  {{top-errors errors=errors}}
+
+  {{#if enabling}}
+    <div class="text-center m-20">
+      <button class="btn bg-primary btn-disabled" disabled>
+        <i class="icon icon-spinner icon-spin"></i>
+        {{t 'artifactoryPage.enabling'}}
+      </button>
+    </div>
+  {{else}}
+    <div class="text-center m-20">
+      <button class="btn bg-primary" {{action 'enable'}}>{{t 'artifactoryPage.enable'}}</button>
+    </div>
+  {{/if}}
+
+{{else}}
+  {{banner-message
+      icon="icon-success"
+      color='bg-success mb-0 mt-10'
+      message=(t 'artifactoryPage.enabled')
+      htmlSafe=true
+  }}
+
+  <div class="mt-30">
+    <b>{{t 'artifactoryPage.nativeUi'}}</b>
+    <a href="http://35.193.222.195/artifactory/webapp/" target="_blank">
+      http://35.193.222.195/artifactory/webapp/
+    </a>
+  </div>
+
+  <section class="box mt-30">
+    <h3>{{t 'artifactoryPage.dangerZone' htmlSafe=true}}</h3>
+    <hr/>
+    {{#if confirmDisable}}
+      {{#if disabling}}
+        <button class="btn bg-primary btn-disabled" disabled>
+          <i class="icon icon-spinner icon-spin"></i>
+          {{t 'artifactoryPage.disabling'}}
+        </button>
+      {{else}}
+        <button class="btn bg-error" {{action "disable"}}>
+          <i class="icon icon-alert"></i> {{t 'artifactoryPage.sureToDisableArtifactory'}}
+        </button>
+      {{/if}}
+    {{else}}
+      <button class="btn bg-error" {{action "promptDisable"}}>
+        {{t 'artifactoryPage.disable'}}
+      </button>
+    {{/if}}
+  </section>
+{{/if}}

@@ -215,6 +215,14 @@ const rootNav = [
         ctx: [getClusterId],
         resourceScope: 'cluster',
       },
+      {divider: true},
+      {
+        id: 'cluster-tools-artifactory',
+        localizedLabel: 'nav.tools.artifactory',
+        route: 'authenticated.cluster.artifactory',
+        ctx: [getClusterId],
+        resourceScope: 'cluster',
+      },
     ],
   },
 
