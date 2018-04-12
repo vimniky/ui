@@ -1,14 +1,27 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import { get, set, computed } from '@ember/object';
+import NewOrEdit from 'ui/mixins/new-or-edit';
 
-export default Controller.extend({
+export default Controller.extend(NewOrEdit, {
+  intl: service(),
   more: false,
   errors: null,
   confirmDisable: false,
   enabled: false,
   disabling: false,
   enabling: false,
+  passwordAgain: null,
+
+  varlidataNewPassword() {
+    const p = get(this, 'model.password') || '';
+    const p1 = get(this, 'passwordAgain') || '';
+    const errors = get(this, 'errors');
+
+    if (p.trim() !== p1.trim()) {
+      errors.push(get(this, 'intl', 'artifactoryPage.password don\'t match'));
+    }
+  },
 
   init() {
     this._super(...arguments);
@@ -40,14 +53,17 @@ export default Controller.extend({
       }, 5000);
       set(this, 'timer', timer);
     },
+
     disable() {
       clearTimeout(get(this, 'timer'));
       set(this, 'disabling', true);
       setTimeout(() => {
         set(this, 'confirmDisable', false);
         set(this, 'enabled', false);
+        set(this, 'disabling', false);
       }, 3000);
     },
+
     enable() {
       set(this, 'enabling', true);
       setTimeout(() => {
