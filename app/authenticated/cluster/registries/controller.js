@@ -180,12 +180,12 @@ export default Controller.extend(NewOrEdit, {
               data: get(this, 'catalogApp'),
             }).then(res => {
               this.refreshModel();
-              cb();
+              cb(true);
               console.log('created');
             });
           }).catch(err => {
             console.log(err)
-            cb(true);
+            cb();
             set(this, 'errors', [err.body.message]);
           });
         } else {
@@ -195,11 +195,11 @@ export default Controller.extend(NewOrEdit, {
             data: get(this, 'catalogApp'),
           }).then(res => {
             this.refreshModel();
-            cb();
+            cb(true);
             console.log('created');
           }).catch(err => {
             console.log(err)
-            cb(true);
+            cb();
             set(this, 'errors', [err.body.message]);
           });
         }
